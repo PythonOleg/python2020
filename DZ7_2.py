@@ -1,23 +1,26 @@
+class Iter:
+    def __init__(self,first,second,step):
+        
+        self.slice_data = data[first:second:step]
+        self.counter = -1
+        self.max = len(self.slice_data)-1
 
-class MyRange:
-    def __init__(self,number):
-        self.num = number
-        self.i = 0
-    
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.i < num:
-           self.i += 1
-           return self.i
-           
-        if self.i == num:
+        self.counter += 1    
+        if self.counter < self.max:
+            return self.slice_data[self.counter]
+        else:
             raise StopIteration
-       
-    
+        
 
-num = int(input('Input number: '))
-iterator = MyRange(num)
+data = input('Input data')
+first = int(input('Input first integer: '))
+second = int(input('Input second integer: '))
+step = int(input("Input step: "))
+
+iterator = Iter(first,second,step)
 for i in iterator:
-    print(i)
+    print(i,end=' ')
