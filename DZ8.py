@@ -2,36 +2,22 @@ import os,sys
 
 class MyOpen():
 
-    def __init__(self,address,prava,code):
+    def __init__(self,address,prava,code='utf-8'):
         self.address = address
         self.prava = prava
         self.code = code
         self.cursor_position = 0
         self.line = ''
 
-    def prava(self):
-        if self.prava == 'r':
-            self.prava = os.O_RDONLY
-        if self.prava == 'w':
-            self.prava = (os.O_WRONLY | os.O_CREAT)
-        if self.prava == 'a':
-            self.prava = os.O_APPEND
-        if self.prava == 'ra':
-            self.prava = (os.O_RDONLY | os.O_APPEND)
-        if self.prava == 'rw':
-            self.prava = os.O_RDWR
-        if self.prava == 'b':
-            self.prava = os.O_BINARY
-
     def write(self):
         string = input('Input line to be writed: ')
-        line = file.write()
+        line = file.write(string)
         return line
     def writelines(self):
         n = int(input('how many lines must be writed? '))
         for i in range(n):
             line = input('Input line {}: '.format(i+1))
-            file.write(file_address,line)
+            file.write(line)
         return line
     def read(self):
         file.read(self)
@@ -58,9 +44,23 @@ class MyOpen():
     def close(self,file_address, prava,code):
         file.close(self,file_address, prava,code)
 
-file_address = input('Input file name: ')
-flags = input('Input file right: ')
+file_address = input('Input file address: ')
+flags = input('Input file flag: ')
 file = MyOpen(file_address,flags, code='utf-8')
+
+if flags == 'w':
+   file.write()
+if flags == 'a':
+   file.write(file_address,os.O_APPEND)
+if flags == 'ra':
+   file.read_write(os.O_RDONLY | os.O_APPEND)
+if flags == 'rw':
+   file.read_write(file_address,os.O_RDWR)
+if flags == 'b':
+   file.write(file_address,os.O_BINARY)
+if flags == 'r':
+   file.read(file_address,os.O_RDONLY)
+file.close()
 
 
 
